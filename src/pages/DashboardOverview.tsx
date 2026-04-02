@@ -7,16 +7,15 @@ import { LivingAppsService, createRecordUrl } from '@/services/livingAppsService
 import { useState, useMemo } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
-import { StatCard } from '@/components/StatCard';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { FahrstundenDialog } from '@/components/dialogs/FahrstundenDialog';
 import { PruefungenDialog } from '@/components/dialogs/PruefungenDialog';
 import { AI_PHOTO_SCAN } from '@/config/ai-features';
 import {
   IconAlertCircle, IconTool, IconRefresh, IconCheck,
-  IconPlus, IconPencil, IconTrash, IconCar, IconUsers,
+  IconPlus, IconPencil, IconTrash, IconCar,
   IconClipboardCheck, IconCalendar, IconClock, IconUser,
-  IconChevronLeft, IconChevronRight, IconUserPlus, IconAward,
+  IconChevronLeft, IconChevronRight, IconUserPlus, IconAward, IconUsers,
 } from '@tabler/icons-react';
 import { format, isToday, isTomorrow, isYesterday, parseISO, isSameDay } from 'date-fns';
 import { de } from 'date-fns/locale';
@@ -88,17 +87,6 @@ export default function DashboardOverview() {
       })
       .sort((a, b) => (a.fields.datum ?? '').localeCompare(b.fields.datum ?? ''));
   }, [enrichedPruefungen, selectedDate]);
-
-  const stats = useMemo(() => {
-    const aktiveSchueler = fahrschueler.filter(s => s.fields.status?.key === 'aktiv').length;
-    const einsatzbereiteFahrzeuge = fahrzeuge.filter(f => f.fields.zustand?.key === 'einsatzbereit').length;
-    const todayTotal = enrichedFahrstunden.filter(f => {
-      if (!f.fields.datum) return false;
-      try { return isSameDay(parseISO(f.fields.datum), new Date()); } catch { return false; }
-    }).length;
-    const offenePruefungen = pruefungen.filter(p => p.fields.ergebnis?.key === 'ausstehend').length;
-    return { aktiveSchueler, einsatzbereiteFahrzeuge, todayTotal, offenePruefungen };
-  }, [fahrschueler, fahrzeuge, enrichedFahrstunden, pruefungen]);
 
   const defaultFahrstundeValues = useMemo(() => {
     const dateStr = format(selectedDate, 'yyyy-MM-dd') + 'T08:00';
@@ -185,34 +173,6 @@ export default function DashboardOverview() {
           </div>
           <IconChevronRight size={16} className="text-muted-foreground shrink-0" />
         </a>
-      </div>
-
-      {/* KPI Leiste */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <StatCard
-          title="Aktive Schüler"
-          value={String(stats.aktiveSchueler)}
-          description="Aktuell in Ausbildung"
-          icon={<IconUsers size={18} className="text-muted-foreground" />}
-        />
-        <StatCard
-          title="Heute"
-          value={String(stats.todayTotal)}
-          description="Fahrstunden heute"
-          icon={<IconCar size={18} className="text-muted-foreground" />}
-        />
-        <StatCard
-          title="Fahrzeuge"
-          value={String(stats.einsatzbereiteFahrzeuge)}
-          description="Einsatzbereit"
-          icon={<IconCar size={18} className="text-muted-foreground" />}
-        />
-        <StatCard
-          title="Prüfungen"
-          value={String(stats.offenePruefungen)}
-          description="Ausstehend"
-          icon={<IconClipboardCheck size={18} className="text-muted-foreground" />}
-        />
       </div>
 
       {/* Tagesplan Hero */}
