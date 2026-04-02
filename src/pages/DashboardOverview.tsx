@@ -15,7 +15,7 @@ import {
   IconAlertCircle, IconTool, IconRefresh, IconCheck,
   IconPlus, IconPencil, IconTrash, IconCar,
   IconClipboardCheck, IconCalendar, IconClock, IconUser,
-  IconChevronLeft, IconChevronRight, IconUserPlus, IconAward, IconUsers,
+  IconChevronLeft, IconChevronRight, IconUsers,
 } from '@tabler/icons-react';
 import { format, isToday, isTomorrow, isYesterday, parseISO, isSameDay } from 'date-fns';
 import { de } from 'date-fns/locale';
@@ -145,36 +145,6 @@ export default function DashboardOverview() {
 
   return (
     <div className="space-y-6">
-      {/* Workflow-Navigation */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <a
-          href="#/intents/schueler-onboarding"
-          className="flex items-center gap-4 bg-card border border-border border-l-4 border-l-primary rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-            <IconUserPlus size={20} className="text-primary" stroke={1.5} />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="font-semibold text-sm">Schüler einschreiben</div>
-            <div className="text-xs text-muted-foreground mt-0.5">Neuen Fahrschüler anlegen, Fahrstunden planen und Prüfungen vorbuchen</div>
-          </div>
-          <IconChevronRight size={16} className="text-muted-foreground shrink-0" />
-        </a>
-        <a
-          href="#/intents/pruefungsabschluss"
-          className="flex items-center gap-4 bg-card border border-border border-l-4 border-l-primary rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-            <IconAward size={20} className="text-primary" stroke={1.5} />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="font-semibold text-sm">Prüfung abschließen</div>
-            <div className="text-xs text-muted-foreground mt-0.5">Prüfungsergebnisse eintragen und Ausbildung erfolgreich beenden</div>
-          </div>
-          <IconChevronRight size={16} className="text-muted-foreground shrink-0" />
-        </a>
-      </div>
-
       {/* Tagesplan Hero */}
       <div className="rounded-2xl border bg-card overflow-hidden">
         {/* Datumsnavigation */}
