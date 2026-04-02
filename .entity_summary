@@ -1,0 +1,10 @@
+- Fahrschüler (fahrschueler): vorname[string/text], nachname[string/text], email[string/email], telefon[string/tel], geburtsdatum[date/date], fuehrerscheinklasse[lookup/select], status[lookup/radio], theorie_bestanden[bool]
+- Fahrzeuge (fahrzeuge): kennzeichen[string/text], marke_modell[string/text], fahrzeugtyp[lookup/select], fuehrerscheinklasse[lookup/select], zustand[lookup/radio]
+- Prüfungen (pruefungen): schueler_ref[applookup/select], lehrer_ref[applookup/select], pruefungsart[lookup/radio], datum[date/datetimeminute], ergebnis[lookup/select]
+  → schueler_ref links to app_id 69ca3843ded5938eab2327f3
+  → lehrer_ref links to app_id 69ca383e14f24285902ff59a
+- Fahrlehrer (fahrlehrer): vorname[string/text], nachname[string/text], telefon[string/tel], lizenzen[multiplelookup/checkbox], verfuegbarkeit[lookup/select]
+- Fahrstunden (fahrstunden): schueler_ref[applookup/select], lehrer_ref[applookup/select], fahrzeug_ref[applookup/select], datum[date/datetimeminute], dauer_minuten[number], fahrstunden_typ[lookup/select], status[lookup/radio], notizen[string/textarea]
+  → schueler_ref links to app_id 69ca3843ded5938eab2327f3
+  → lehrer_ref links to app_id 69ca383e14f24285902ff59a
+  → fahrzeug_ref links to app_id 69ca38442d14580b19bbb885
