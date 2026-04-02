@@ -100,6 +100,11 @@ export default function DashboardOverview() {
     return { aktiveSchueler, einsatzbereiteFahrzeuge, todayTotal, offenePruefungen };
   }, [fahrschueler, fahrzeuge, enrichedFahrstunden, pruefungen]);
 
+  const defaultFahrstundeValues = useMemo(() => {
+    const dateStr = format(selectedDate, 'yyyy-MM-dd') + 'T08:00';
+    return { datum: dateStr };
+  }, [selectedDate]);
+
   if (loading) return <DashboardSkeleton />;
   if (error) return <DashboardError error={error} onRetry={fetchAll} />;
 
@@ -149,11 +154,6 @@ export default function DashboardOverview() {
     d.setDate(d.getDate() + 1);
     setSelectedDate(d);
   };
-
-  const defaultFahrstundeValues = useMemo(() => {
-    const dateStr = format(selectedDate, 'yyyy-MM-dd') + 'T08:00';
-    return { datum: dateStr };
-  }, [selectedDate]);
 
   return (
     <div className="space-y-6">
